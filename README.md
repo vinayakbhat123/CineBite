@@ -1,8 +1,11 @@
-#CineBite website
+
+# CineBite website
   -create react app
   -configure tailwindcss
+  -Header
+  -Login page
 
-#Features
+# Features
    -Login/Sign Up page\
       -Sign In/Sign Up Form
       -redirect to Browse Page    
@@ -17,4 +20,6 @@
       -Search Bar
       -Movie Suggestion
 
-#Connect Git and github
+# Connect Git and github
+
+# created a Header,Body,Login and Footer Components
