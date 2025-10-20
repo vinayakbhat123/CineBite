@@ -11,8 +11,9 @@
   -Firebase Setup
   -Deploying our app to production
   -create Sign Up User Account 
-  -implement sign Up and sign In form
+  -implement sign Up /Sign In  and sign Out feature
   -Created redux store with userSlice
+  -Update Profile
 # Features
    -Login/Sign Up page\
       -Sign In/Sign Up Form

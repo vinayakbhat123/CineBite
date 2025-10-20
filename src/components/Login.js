@@ -1,11 +1,16 @@
 import { useRef, useState } from "react";
-import Header from "./Header";
 import {CheckValidData} from "../utils/Validate"
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth"
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile} from "firebase/auth"
 import {auth} from "../utils/firebase"
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/UserSlice";
 const Login = () => {
   const [isSignInForm,setisSignInForm] = useState(true)
   const [ErrorMsg,setErrorMsg] = useState(null);
+  const dispatch = useDispatch();
+  
+  const navigate = useNavigate();
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -26,8 +31,21 @@ const Login = () => {
       .then((userCredential) => {
        // Signed up 
          const user = userCredential.user;
-         console.log("User Created :",user);
-    // ...
+         updateProfile(user, {
+              displayName: name.current?.value
+          }).then(() => {
+              const {uid,email,displayName} = auth.currentUser;
+              console.log({uid:uid,email:email,displayName:displayName})
+              dispatch(addUser({uid:uid,email:email,displayName:displayName}));  
+              alert("User Created :",user.displayName);
+              navigate("/browse");
+             // ...
+          }).catch((error) => {
+             // An error occurred
+             setErrorMsg(error.message)
+             // ... 
+          });
+            // ...
      })
       .catch((error) => {
           const errorCode = error.code;
@@ -41,6 +59,8 @@ const Login = () => {
       // Signed in 
          const user = userCredential.user;
          console.log("Sign In Successfully:",user)
+         navigate("/browse")
+         alert("Sign In Successfully")
       // ...
     })
      .catch((error) => {
@@ -53,7 +73,6 @@ const Login = () => {
   }
       return (
         <div className="">
-            <Header />
            <img className="w-full" src="https://images.pexels.com/photos/3131971/pexels-photo-3131971.jpeg" alt="logo" />
              <div className="absolute inset-0 flex justify-center items-center py-15">
                <form onSubmit={(e) => {e.preventDefault()}} className="bg-black bg-opacity-75 p-6 rounded-lg shadow-lg text-white">

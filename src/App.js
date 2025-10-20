@@ -1,13 +1,16 @@
 import {Provider} from "react-redux";
-import Body from "../src/components/Body"
 import Footer from "./components/Footer";
 import appstore from "./utils/appstore";
+import Header from "./components/Header";
+import { Outlet } from "react-router-dom";
 function App() {
   return (
   <div>
      <Provider store={appstore}>
-      <Body />
-      <Footer/></Provider> 
+      <Header />
+      <Outlet />
+      <Footer/>
+      </Provider> 
   </div> 
   );
 }
