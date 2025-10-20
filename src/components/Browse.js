@@ -1,6 +1,9 @@
+import useplayingmovies from "../hooks/useplayingmovies";
+
 const Browse = () => {
-    return(
-        <div> 
+   useplayingmovies();
+     return(
+        <div className=""> 
             <div className="flex">
                 < p className=" justify-center">
                      What is Lorem Ipsum?

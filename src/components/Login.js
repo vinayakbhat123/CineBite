@@ -2,15 +2,13 @@ import { useRef, useState } from "react";
 import {CheckValidData} from "../utils/Validate"
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile} from "firebase/auth"
 import {auth} from "../utils/firebase"
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/UserSlice";
+import { BG_URL } from "../utils/constants";
 const Login = () => {
   const [isSignInForm,setisSignInForm] = useState(true)
   const [ErrorMsg,setErrorMsg] = useState(null);
   const dispatch = useDispatch();
-  
-  const navigate = useNavigate();
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -37,9 +35,6 @@ const Login = () => {
               const {uid,email,displayName} = auth.currentUser;
               console.log({uid:uid,email:email,displayName:displayName})
               dispatch(addUser({uid:uid,email:email,displayName:displayName}));  
-              alert("User Created :",user.displayName);
-              navigate("/browse");
-             // ...
           }).catch((error) => {
              // An error occurred
              setErrorMsg(error.message)
@@ -58,22 +53,16 @@ const Login = () => {
      .then((userCredential) => {
       // Signed in 
          const user = userCredential.user;
-         console.log("Sign In Successfully:",user)
-         navigate("/browse")
-         alert("Sign In Successfully")
-      // ...
     })
      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setErrorMsg(errorCode +":" +errorMessage )
+        setErrorMsg(error.Code +":" +error.message )
      });
 
     }
   }
       return (
         <div className="">
-           <img className="w-full" src="https://images.pexels.com/photos/3131971/pexels-photo-3131971.jpeg" alt="logo" />
+           <img className="w-full" src={BG_URL} alt="logo" />
              <div className="absolute inset-0 flex justify-center items-center py-15">
                <form onSubmit={(e) => {e.preventDefault()}} className="bg-black bg-opacity-75 p-6 rounded-lg shadow-lg text-white">
                 <h1 className="text-green-700 justify-center items-center flex font-bold"> { isSignInForm ? "Sign In" : "Sign Up"}</h1>

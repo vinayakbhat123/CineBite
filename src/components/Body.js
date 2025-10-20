@@ -1,7 +1,9 @@
 const Body = () => {
+
+
     return (
         <div>
-          Body
+        Body
         </div>
     )
 } 

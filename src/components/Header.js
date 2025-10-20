@@ -1,29 +1,43 @@
 import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
-import { signOut } from "firebase/auth";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { removeUser } from "../utils/UserSlice";
-
+import { LOGO_URL } from "../utils/constants";
+import { signOut,onAuthStateChanged } from "firebase/auth";
+import { useSelector,useDispatch } from "react-redux";
+import { removeUser,addUser } from "../utils/UserSlice";
+import { useEffect } from "react";
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const User =  useSelector(store => store.user)
     const handleSignOut=() =>{
         signOut(auth).then(() => {
-       alert("Sign-out successful")
-        navigate("/");
-        dispatch(removeUser());
+           alert("Sign-out successful")
        }).catch((error) => {
         // An error happened.
         navigate("/error")
        });
     }
+    // onauthstatechanged
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+       if (user) {
+         const {uid,email,displayName} = user;
+         dispatch(addUser({uid:uid,email:email,displayName:displayName}));  
+         alert("Sign In Succesfull")
+         navigate("/browse")
+      } else {
+          // User is signed out
+          dispatch(removeUser());
+          navigate("/")
+        }
+});   return () =>  unsubscribe()
+  },[])
+
   return (
-    <header className=" top-0 w-full bg-black text-white flex items-center justify-between px-6 py-1 shadow-lg z-50">
+    <header className=" top-0 w-full bg-gray-600 bg-gradient-to-b text-white flex items-center justify-between px-6 py-1 shadow-lg z-50">
       <img
-        className="w-32 rounded-md"
-        src="https://images.pexels.com/photos/5852131/pexels-photo-5852131.jpeg"
+        className="w-20 rounded-md"
+        src={LOGO_URL}
         alt="logo-header"
       />
     { User && <nav>

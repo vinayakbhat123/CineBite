@@ -14,6 +14,10 @@
   -implement sign Up /Sign In  and sign Out feature
   -Created redux store with userSlice
   -Update Profile
+  -BugFix: Sign up user displayname updated
+  -BugFix: if the user not logged in redirect/browse to login page and vice versa
+  -unsubscribe the onauthstatechanged callback
+  -add hardcoded file to constants file.
 # Features
    -Login/Sign Up page\
       -Sign In/Sign Up Form
@@ -29,6 +33,4 @@
       -Search Bar
       -Movie Suggestion
 
-# Connect Git and github
-
-# created a Header,Body,Login and Footer Components
+# Connected to  Git and github
