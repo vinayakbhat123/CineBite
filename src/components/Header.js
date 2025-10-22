@@ -10,9 +10,8 @@ const Header = () => {
     const dispatch = useDispatch();
     const User =  useSelector(store => store.user)
     const handleSignOut=() =>{
-        signOut(auth).then(() => {
-           alert("Sign-out successful")
-       }).catch((error) => {
+        signOut(auth).then(() => {})
+        .catch((error) => {
         // An error happened.
         navigate("/error")
        });
@@ -23,7 +22,6 @@ const Header = () => {
        if (user) {
          const {uid,email,displayName} = user;
          dispatch(addUser({uid:uid,email:email,displayName:displayName}));  
-         alert("Sign In Succesfull")
          navigate("/browse")
       } else {
           // User is signed out

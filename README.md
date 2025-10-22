@@ -18,6 +18,7 @@
   -BugFix: if the user not logged in redirect/browse to login page and vice versa
   -unsubscribe the onauthstatechanged callback
   -add hardcoded file to constants file.
+  -add movies list to store
 # Features
    -Login/Sign Up page\
       -Sign In/Sign Up Form

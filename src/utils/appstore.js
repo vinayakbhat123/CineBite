@@ -1,10 +1,10 @@
 import {configureStore} from "@reduxjs/toolkit";
 import UserReducer from "./UserSlice"
-import moviesReducer from "./moviesSlice"
+import  PixelsReducer from "./PixelsSlice"
 const appstore = configureStore({
     reducer:{
         user:UserReducer,
-        movies:moviesReducer,
+        Pixels:PixelsReducer,
     },
 })
 export default appstore;
