@@ -1,5 +1,5 @@
 
-# CineBite website
+# CineBiteGPT 
   -create react app
   -configure tailwindcss
   -Header,
@@ -18,20 +18,17 @@
   -BugFix: if the user not logged in redirect/browse to login page and vice versa
   -unsubscribe the onauthstatechanged callback
   -add hardcoded file to constants file.
-  -add movies list to store
+  -GPT Search Page
+  -GPT Search Bar
+  -(special)Multi-language Feature in our app
+  -Integrate GPT API
+
 # Features
-   -Login/Sign Up page\
+   -Login/Sign Up page\ 
       -Sign In/Sign Up Form
       -redirect to Browse Page    
    -Browse (after authentication)
       -Header
-      -main movie
-        -movie trailer background
-        -Title & and description
-        -movieSuggestion
-            -movieList
-   -CineBite
-      -Search Bar
-      -Movie Suggestion
+      -GPT Search Bar
 
 # Connected to  Git and github

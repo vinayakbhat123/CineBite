@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Browse from './components/Browse';
 import Login from './components/Login';
-import Body from './components/Body';
 
 const appRouter = createBrowserRouter([
   {path:"/",
@@ -17,9 +16,6 @@ const appRouter = createBrowserRouter([
       },
       {path:"/browse",
         element:<Browse />
-      },
-      {path:"/body",
-        element:<Body />
       }
     ]
   }
