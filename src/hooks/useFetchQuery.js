@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { pixels_key } from "../utils/constants";
-
-const useFetchQuery = ({ query }) => {
-  const [data, setData] = useState(null);
+import { useDispatch, useSelector } from "react-redux";
+import { addData } from "../utils/DataSlice";
+const useFetchQuery = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const query = useSelector((store) => store.query.queries)
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!query) return;
 
@@ -26,10 +27,8 @@ const useFetchQuery = ({ query }) => {
         }
 
         const data = await response.json();
-        console.log("Fetched video data:", data.videos);
-        setData(data?.videos );
+        dispatch(addData(data?.videos));
       } catch (err) {
-        console.error("Error fetching video:", err);
         setError(err);
       } finally {
         setLoading(false);
@@ -39,7 +38,7 @@ const useFetchQuery = ({ query }) => {
     fetchVideo();
   }, [query]);
 
-  return { data, loading, error };
+  return {loading, error };
 };
 
 export default useFetchQuery;
