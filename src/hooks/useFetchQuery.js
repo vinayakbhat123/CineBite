@@ -7,10 +7,8 @@ const useFetchQuery = () => {
   const [error, setError] = useState(null);
   const query = useSelector((store) => store.query.queries)
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!query) return;
-
-    const fetchVideo = async () => {
+  const data = useSelector((store) =>store.data.datas)
+   const fetchVideo = async () => {
       try {
         setLoading(true);
         const response = await fetch(
@@ -34,9 +32,9 @@ const useFetchQuery = () => {
         setLoading(false);
       }
     };
-
-    fetchVideo();
-  }, [query]);
+   useEffect(() => {
+     !data && fetchVideo();
+  }, []);
 
   return {loading, error };
 };
